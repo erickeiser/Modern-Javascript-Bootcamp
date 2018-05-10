@@ -1,4 +1,4 @@
-const notes = getSavedNotes()
+let notes = getSavedNotes()
 
 const filters = {
   searchText: ''
@@ -8,15 +8,18 @@ const filters = {
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click',function(e){
+  const id = uuidv4()
+
   notes.push({
-    id: uuidv4(),
+    id: id,
     title: '',
     body: ''
   })
 
   saveNotes(notes)
-  renderNotes(notes, filters)
+  location.assign(`/notes-app/edit.html#${id}`)
 })
+  
 
 document.querySelector('#searchText').addEventListener('input', function(e){
   filters.searchText = e.target.value
@@ -27,6 +30,23 @@ document.querySelector('#filter-by').addEventListener('change', function(e){
   console.log(e.target.value)
 })
 
+window.addEventListener('storage', function(e){
+  if(e.key === 'notes') {
+    notes = JSON.parse(e.newValue)
+    renderNotes(notes, filters)
+
+  }
+})
+
+const now = new Date()
+console.log(now.toString())
+
+console.log(`Year: ${now.getFullYear()}`)
+console.log(`Month: ${now.getMonth()}`)
+console.log(`Day: ${now.getDate()}`)
+console.log(`Hour: ${now.getHours()}`)
+console.log(`Minute: ${now.getMinutes()}`)
+console.log(`Seconds: ${now.getSeconds()}`)
 
 
 

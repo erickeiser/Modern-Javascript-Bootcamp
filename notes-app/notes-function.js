@@ -26,7 +26,7 @@ const removeNote = function(id) {
 // Generate the DOM structure for a note
 const generateNoteDOM = function(note) {
   const noteElement = document.createElement('div')
-  const textElement = document.createElement('span')
+  const textElement = document.createElement('a')
   const button = document.createElement('button')
 
   // Set up the remove note button
@@ -39,12 +39,12 @@ const generateNoteDOM = function(note) {
   })
 
     // Setup the note title text
-    if(note.title > 0 ) {
+    if(note.title.length > 0 ) {
       textElement.textContent = note.title
     } else {
       textElement.textContent = 'Unnamed note'
     }
-
+    textElement.setAttribute('href',`/notes-app/edit.html#${note.id}`)
     noteElement.appendChild(textElement)
 
     return noteElement

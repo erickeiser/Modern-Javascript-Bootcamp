@@ -1,3 +1,5 @@
+
+
 // Fetch existing todos from local storage
 const getSavedTodos = function() {
 const todoJSON = localStorage.getItem('todos')
@@ -19,6 +21,16 @@ const removeTodo = function(id) {
   })
   if(todoIndex > -1) {
     todos.splice(todoIndex, 1)
+  }
+}
+
+// Toggle the completed Value for a given todo
+const toggleTodo = function(id) {
+  const todo = todos.find(function (todo) {
+    return todo.id === id
+  })
+  if(todo !== undefined) {
+    todo.completed = !todo.completed 
   }
 }
 
@@ -51,7 +63,7 @@ filteredTodos.forEach(function(todo){
     })
   }
   // Get the Dom elements for an individual todo
-  const generateTodoDom = function(todo) {
+    const generateTodoDom = function(todo) {
     const todoElement = document.createElement('div')
     const checkbox = document.createElement('input')
     const todoText = document.createElement('span')
@@ -59,7 +71,13 @@ filteredTodos.forEach(function(todo){
 
     //set up todo checkbox
     checkbox.setAttribute('type', 'checkbox')
+    checkbox.checked = todo.completed
     todoElement.appendChild(checkbox)
+    checkbox.addEventListener('change', function(e) {
+      toggleTodo(todo.id)
+      saveTodos(todos)
+      renderTodos(todos, filters)
+    })
 
     // set up todo text
     todoText.textContent = todo.text
