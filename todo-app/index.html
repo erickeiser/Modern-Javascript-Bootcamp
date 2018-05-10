@@ -8,22 +8,24 @@
 </head>
 <body>
   <h1>Todos</h1>
-    <input type="text" id="filterTodo" placeholder="Filter todos"><br /><br />
+    <input type="text" id="filterTodo" placeholder="Filter todos">
+    <label>
+      <input type="checkbox" id="hide-checked">
+        Hide Completed
+    </label><br /><br />
+    <div id="todos"></div>
     <form id='todo-form'>
       <input type="text" name='addTodo' placeholder='add a new todo'>
       <button>Submit</button>
     </form>
      
-  <div id="todos"></div>
-<label>
-  <input type="checkbox" id="hide-checked">
-    Hide Completed
-</label>
+  
+
  
 
     
-  
-
+  <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+  <script src="todo-functions.js"></script> 
   <script src="todo.js"></script>
 </body>
 </html>
